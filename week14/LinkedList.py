@@ -77,7 +77,7 @@ class LinkedList(object):
             newTail = self.head              
             for index in range(self.size - 1):
                 newTail = newTail.getNext()
-            newTail = self.tail
+            self.tail = newTail
         self.size -= 1
         return deletedItem                          
 
@@ -106,15 +106,14 @@ class LinkedList(object):
             self.prepend(item)
         elif index <= self.size:            # if valid index, add the element in
             curr = self.head
-            for i in range(self.size):
-                if i == index - 1:
-                    previousElement = curr
-                    nextElement = curr.getNext()
-                    newElement = Node(item)
-                    previousElement.setNext(newElement)
-                    newElement.setNext(nextElement)
-                    self.size += 1
+            for i in range(index-1):
                 curr = curr.getNext()
+            previousElement = curr
+            nextElement = curr.getNext()
+            newElement = Node(item)
+            previousElement.setNext(newElement)
+            newElement.setNext(nextElement)
+            self.size += 1
 
     def pop(self, index):
         """ remove the item from the linked list at given index, return item """
@@ -122,15 +121,14 @@ class LinkedList(object):
             return self.deleteHead()
         elif index < self.size:        # if valid index, remove element at index
             curr = self.head
-            for i in range(self.size):
-                if i == index - 1:        
-                    previousElement = curr
-                    removedElement = curr.getNext()
-                    nextElement = removedElement.getNext()
-                    previousElement.setNext(nextElement)           
-                    self.size -= 1                                    
-                    return removedElement.getItem()
+            for i in range(index - 1):
                 curr = curr.getNext()
+            previousElement = curr
+            removedElement = curr.getNext()
+            nextElement = removedElement.getNext()
+            previousElement.setNext(nextElement)
+            self.size -= 1                                    
+            return removedElement.getItem()
 
     def remove(self, item):
         """ remove the specified item from the linked list """
