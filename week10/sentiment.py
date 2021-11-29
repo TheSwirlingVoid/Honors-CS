@@ -41,7 +41,7 @@ def insertionSortScores(wordScores):
 		offsetIndex = i
 		for numCheck in range(i):
 			newIndex = i-numCheck
-			if wordScores[newIndex][0] < wordScores[newIndex-1][0]:
+			if wordScores[newIndex][1] < wordScores[newIndex-1][1]:
 
 
 				firstVal = wordScores[newIndex-1]
@@ -53,34 +53,22 @@ def insertionSortScores(wordScores):
 			else:
 				break
 #---------------------------------------------------------------------------------#
-def scoreWord(sentimentRating, wordInSentence, wordScores):
+def scoreWord(sentimentRating, word, wordScores):
 	"""
 	Creates or adds on to the sentiment score word list with the word and rating associated with it specified.
 
 	Params: sentimentRating (int): a number 0-4 that was associated with the review the word was in
-			wordInSentence (string): the word to score
+			word (string): the word to score
 			wordScores (list<list<int, string>>): the list of current word score entries
 			stopWords (list<string>): the list of words to ignore
 	Returns: None
 	"""
 	rating = int(sentimentRating)-2
 	for wordScore in wordScores:
-		if wordScore[0] == wordInSentence:
+		if wordScore[0] == word:
 			wordScore[1] += rating
 			return
-	wordScores.append([wordInSentence, rating])
-#---------------------------------------------------------------------------------#
-# def analyzeLines(file):
-# 	"""
-# 	Takes all the lines of the specified file, and creates a list of all the unique words with their sentiment scores.
-
-# 	Params: file (file): the file to read the sentiment scores and words from
-
-# 	Returns: (list<list<int, string>>) the list of words paired with their sentiment scores
-# 	"""
-# 	wordScores = []
-	
-# 	return wordScores
+	wordScores.append([word, rating])
 #---------------------------------------------------------------------------------#
 def getStopWords():
 	"""
@@ -108,12 +96,11 @@ def readFile(filename, stopWords):
 	wordScores = []
 	for line in infile:
 		line = line.strip().lower()
-		sentimentRating = line[0] 					# get sentiment rating
-		wordsInReview = line[1:].split(" ") 		# get sentence
+		sentimentRating = line[0] 						  # get sentiment rating
+		wordsInReview = line[1:].split(" ") 				      # get sentence
 		for word in wordsInReview:
 			if word.isalpha() and (binarySearch(stopWords, word) == False):
-				# Update word-rating pairs in scoreWord function
-				scoreWord(sentimentRating, word, wordScores)
+				scoreWord(sentimentRating, word, wordScores)    # update ratings
 	return wordScores
 #---------------------------------------------------------------------------------#
 def printWordScores(numLowScores, numHighScores, wordScores):
@@ -126,7 +113,7 @@ def printWordScores(numLowScores, numHighScores, wordScores):
 #---------------------------------------------------------------------------------#
 
 def main():
-	stopWords = getStopWords() # Get stop words
+	stopWords = getStopWords()
 	wordScores = readFile("movieReviews.txt", stopWords) # Generate sentiment ratings
 	insertionSortScores(wordScores)
 	printWordScores(20, 20, wordScores)

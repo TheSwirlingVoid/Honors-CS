@@ -1,3 +1,10 @@
+"""
+Description: A Node class to be used in a linked list.
+Author: Raj
+Date: Fall 2021
+"""
+
+
 class Node(object):
 
     def __init__(self, item):

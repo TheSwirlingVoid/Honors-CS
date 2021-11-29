@@ -1,3 +1,10 @@
+"""
+Description: A LinkedList class composed of chained-together nodes.
+Author: Raj
+Date: Fall 2021
+"""
+
+
 from node import *
 
 class LinkedList(object):
