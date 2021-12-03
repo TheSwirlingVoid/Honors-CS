@@ -22,9 +22,9 @@ class LinkedList(object):
         s = "head-->"
         curr = self.head
         for i in range(self.size):
-            s  +=  ("(%s)"  %  str(curr.getItem()))
+            s += ("(%s)"  %  str(curr.getItem()))
             curr = curr.getNext()
-        s  += ("<--tail")
+        s += ("<--tail")
         return s
 
     def __len__(self):
@@ -40,7 +40,7 @@ class LinkedList(object):
         else:                         # else link tail to this and reassign tail
             self.tail.setNext(item)
             self.tail = item
-        self.size  +=  1
+        self.size += 1
         return
         
 
@@ -53,7 +53,7 @@ class LinkedList(object):
         else:                              # else link to head and reassign head
             item.setNext(self.head)
             self.head = item
-        self.size  +=  1
+        self.size += 1
         return
 
     def deleteHead(self):
