@@ -6,11 +6,12 @@ Date: Fall 2021
 
 
 from node import *
-from random import choice, random
+from random import choice
 
 class LinkedList(object):
     """ A type of list that operates 
         on singly-linked and forward-pointing nodes. """
+
     def __init__(self):
         """ initializes a linked list with no initial nodes. """
         self.head = None
@@ -18,7 +19,7 @@ class LinkedList(object):
         self.size = 0
 
     def __str__(self):
-        """ return string representation of linked list """
+        """ return pretty-string representation of linked list """
         s = "head-->"
         curr = self.head
         for i in range(self.size):

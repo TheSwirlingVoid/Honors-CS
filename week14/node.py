@@ -6,7 +6,8 @@ Date: Fall 2021
 
 
 class Node(object):
-
+    """ A single node object consisting of an item and a next item. 
+        To be used in a LinkedList. """
     def __init__(self, item):
         """
         Construct new node, with given item. Next Node initially set to None.
@@ -30,11 +31,9 @@ class Node(object):
         return self.next
 
     def setItem(self, i):
-        """ set node item to i """
         self.item = i
 
     def setNext(self, n):
-        """ set node next to n """
         self.next = n
 
 
